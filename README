@@ -1,0 +1,23 @@
+This is a custom build of the game Rogue for the rogueinabox
+library.
+
+
+This Version:
+
+  Provides a command count at the bottom of the screen, which make
+it easy to tell when a command has been completely elaborated by
+the game.
+
+  Allows building with and without monsters.
+
+
+Build instructions:
+
+  with monsters:
+
+   $ ./build.sh m
+
+  without monsters:
+
+   $ ./build.sh no_m
+
