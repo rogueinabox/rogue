@@ -1,4 +1,6 @@
 rogue
+rogue_monsters
+rogue_without_monsters
 rogue.*
 rogue_src/config.log
 rogue_src/config.status

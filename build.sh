@@ -2,45 +2,66 @@
 
 
 print_usage() {
-    echo "usage: $0 MONSTER_OPTION"
+    echo "usage: $0"
     echo ""
-    echo "arguments:"
-    echo -e "MONSTER_OPTION\t 'm' for building with monsters, or 'no_m' for building without"
+    echo "Builds the game with and without monsters"
+    echo ""
+    echo "optional arguments:"
+    echo -e "  -?, -h, --help\t show this help message and exit"
 }
 
-if [ $# -eq 0 ]; then
+if [[ "$1" == "-?" || "$1" == "-h" || "$1" == "--help" ]]; then
     print_usage
-    exit 1
-elif [ $# -ne 1 ]; then
-    print_usage
-    exit 1
-elif [[ "$1" != "m" && "$1" != "no_m" ]]; then
-    echo -e "error: '$1' is not a valid MONSTER_OPTION \n"
+    exit 0
+elif [ $# -ne 0 ]; then
+    echo "error: unexpected arguments"
     print_usage
     exit 1
 fi
 
+with_monsters="rogue_monsters"
+without_monsters="rogue_without_monsters"
 
-cd ./rogue_src
-make clean
-./configure
+build() {
+    # parameters:
+    #   $1: whether to compile with monsters, use $with_monsters or $without_monsters
 
-if [ "$1" == "m" ]; then
-    echo "building with monsters"
-    make -e EXTRA=-DSPAWN_MONSTERS
-else
-    echo "building without monsters"
-    make
-fi
+    if [[ "$1" != $with_monsters && "$1" != $without_monsters ]]; then
+        echo "error: invalid build option: $1"
+        exit 1
+    fi
 
-if [ $? -eq 0 ]; then
-    # make was succesful
-    mv -t .. rogue rogue.6 rogue.cat rogue.doc rogue.html rogue.me
+    cd ./rogue_src
     make clean
-    echo "Build complete. Executable created in $(realpath ../rogue)"
-else
-    # make failed
-    echo "Build failed."
-    exit $?
-fi
+    ./configure
+
+    if [ "$1" == $with_monsters ]; then
+        echo "building with monsters"
+        make -e EXTRA=-DSPAWN_MONSTERS
+    elif [ "$1" == $without_monsters ]; then
+        echo "building without monsters"
+        make
+    fi
+
+    if [ $? -eq 0 ]; then
+        # make was succesful
+        mv -t .. rogue rogue.6 rogue.cat rogue.doc rogue.html rogue.me
+        make clean
+    else
+        # make failed
+        echo "Build failed."
+        exit $?
+    fi
+
+    cd ..
+    mv rogue $1
+
+}
+
+build $with_monsters
+build $without_monsters
+
+echo "Build complete. Executables created:"
+echo "  $(realpath $with_monsters)"
+echo "  $(realpath $without_monsters)"
 
