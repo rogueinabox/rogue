@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "rogue.h"
+#include "cmd_count.h"
 
 /*
  * msg:
@@ -18,7 +19,6 @@
 
 static char msgbuf[2*MAXMSG+1];
 static int newpos = 0;
-static int cmd_count = 0;
 
 /* VARARGS1 */
 int
@@ -233,7 +233,7 @@ status()
     printw("Level: %d  Gold: %-5d  Hp: %*d(%*d)  Str: %2d(%d)  Arm: %-2d  Exp: %d/%d  Cmd: %d  %s",
            level, purse, hpwidth, pstats.s_hpt, hpwidth, max_hp, pstats.s_str,
            max_stats.s_str, 10 - s_arm, pstats.s_lvl, pstats.s_exp,
-		   ++cmd_count,
+		   cmd_count,
            state_name[hungry_state]);
   }
 

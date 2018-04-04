@@ -16,7 +16,7 @@
 #include <ctype.h>
 #include "rogue.h"
 
-static int cmd_count = 0;
+int cmd_count = 0;
 
 /*
  * command:
