@@ -9,7 +9,6 @@
 #include <ctype.h>
 #include <string.h>
 #include "rogue.h"
-#include "cmd_count.h"
 
 /*
  * msg:
@@ -19,6 +18,7 @@
 
 static char msgbuf[2*MAXMSG+1];
 static int newpos = 0;
+int cmd_count = 0;
 
 /* VARARGS1 */
 int
@@ -156,6 +156,7 @@ readchar()
   char ch;
 
   ch = (char) md_readchar();
+  cmd_count++;
 
   if (ch == 3) {
     quit(0);

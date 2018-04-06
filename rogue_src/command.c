@@ -16,7 +16,6 @@
 #include <ctype.h>
 #include "rogue.h"
 
-int cmd_count = 0;
 
 /*
  * command:
@@ -41,7 +40,6 @@ command()
   do_fuses(BEFORE);
 
   while (ntimes--) {
-	  ++cmd_count;
     again = FALSE;
 
     if (has_hit) {
