@@ -8,16 +8,11 @@ This Version:
 it easy to tell when a command has been completely elaborated by
 the game.
 
-  Allows building with and without monsters.
+  Builds with and without monsters.
 
 
 Build instructions:
 
-  with monsters:
+   $ ./build.sh
 
-   $ ./build.sh m
-
-  without monsters:
-
-   $ ./build.sh no_m
-
+  This creates the executable files "rogue_monsters" and "rogue_without_monsters".
