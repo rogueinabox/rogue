@@ -224,32 +224,31 @@ treas_room()
     chat(mp.y, mp.x) = (char) tp->o_type;
   }
 
-  #ifdef SPAWN_MONSTERS
   /*
    * fill up room with monsters from the next level down
    */
-
-  if ((nm = rnd(spots) + MINTREAS) < num_monst + 2)
-    nm = num_monst + 2;
-
-  spots = (rp->r_max.y - 2) * (rp->r_max.x - 2);
-
-  if (nm > spots)
-    nm = spots;
-
-  level++;
-
-  while (nm--) {
-    spots = 0;
-
-    if (find_floor(rp, &mp, MAXTRIES, TRUE)) {
-      tp = new_item();
-      new_monster(tp, randmonster(FALSE), &mp);
-      tp->t_flags |= ISMEAN;	/* no sloughers in THIS room */
-      give_pack(tp);
+  if (USE_MONSTERS) {
+    if ((nm = rnd(spots) + MINTREAS) < num_monst + 2)
+      nm = num_monst + 2;
+    
+    spots = (rp->r_max.y - 2) * (rp->r_max.x - 2);
+    
+    if (nm > spots)
+      nm = spots;
+    
+    level++;
+    
+    while (nm--) {
+      spots = 0;
+    
+      if (find_floor(rp, &mp, MAXTRIES, TRUE)) {
+        tp = new_item();
+        new_monster(tp, randmonster(FALSE), &mp);
+        tp->t_flags |= ISMEAN;	/* no sloughers in THIS room */
+        give_pack(tp);
+      }
     }
+    
+    level--;
   }
-
-  level--;
-  #endif
 }

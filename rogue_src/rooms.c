@@ -145,17 +145,15 @@ do_rooms()
       attach(lvl_obj, gold);
     }
 
-	#ifdef SPAWN_MONSTERS
     /*
      * Put the monster in
      */
-    if (rnd(100) < (rp->r_goldval > 0 ? 80 : 25)) {
+    if (USE_MONSTERS && (rnd(100) < (rp->r_goldval > 0 ? 80 : 25))) {
       tp = new_item();
       find_floor(rp, &mp, FALSE, TRUE);
       new_monster(tp, randmonster(FALSE), &mp);
       give_pack(tp);
     }
-	#endif
   }
 }
 

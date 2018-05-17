@@ -17,10 +17,17 @@
 #define NOOP(x) (x += 0)
 #define CCHAR(x) ( (char) (x & A_CHARTEXT) )
 
-/* this define enables the monsters spawn */
-// #define SPAWN_MONSTERS
 /* this define prevents rogue sleeping (ignoring commands) */
 #define NO_SLEEP
+
+/* 
+ * Flags configurable with command line parameters
+ */
+extern bool USE_MONSTERS;              /* Whether to enable monsters */
+extern bool ENABLE_SECRETS;            /* Whether to enable secret (i.e. hidden) doors and corridors */
+extern unsigned int AMULETLEVEL;       /* Level where the amulet of Yendor will spawn */
+extern unsigned int HUNGERTIME;        /* Number of actions it takes for the rogue to become faint */
+extern unsigned int MAXTRAPS;          /* Maximum number of traps */
 
 /*
  * Maximum number of different things
@@ -29,8 +36,6 @@
 #define MAXTHINGS	9
 #define MAXOBJ		9
 #define MAXPACK		23
-#define MAXTRAPS	0
-#define AMULETLEVEL	26
 #define	NUMTHINGS	7	/* number of types of things */
 #define MAXPASS		13	/* upper limit on number of passages */
 #define	NUMLINES	24
@@ -117,7 +122,6 @@
 #define HEALTIME	30
 #define HUHDURATION	20
 #define SEEDURATION	850
-#define HUNGERTIME	1300
 #define MORETIME	150
 #define STOMACHSIZE	2000
 #define STARVETIME	850

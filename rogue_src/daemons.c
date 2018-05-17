@@ -65,8 +65,7 @@ int between = 0;
 void
 rollwand()
 {
-#ifdef SPAWN_MONSTERS
-  if (++between >= 4) {
+  if (USE_MONSTERS && (++between >= 4)) {
     if (roll(1, 6) == 4) {
       wanderer();
       kill_daemon(rollwand);
@@ -75,7 +74,6 @@ rollwand()
 
     between = 0;
   }
- #endif
 }
 
 /*

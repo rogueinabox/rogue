@@ -293,7 +293,7 @@ putpass(coord *cp)
   pp = INDEX(cp->y, cp->x);
   pp->p_flags |= F_PASS;
 
-  if (rnd(10) + 1 < level && rnd(40) == 0)
+  if (ENABLE_SECRETS && (rnd(10) + 1 < level && rnd(40) == 0))
     pp->p_flags &= ~F_REAL;
   else
     pp->p_ch = PASSAGE;
@@ -317,7 +317,7 @@ door(struct room *rm, coord *cp)
 
   pp = INDEX(cp->y, cp->x);
 
-  if (rnd(10) + 1 < level && rnd(5) == 0) {
+  if (ENABLE_SECRETS && (rnd(10) + 1 < level && rnd(5) == 0)) {
     if (cp->y == rm->r_pos.y || cp->y == rm->r_pos.y + rm->r_max.y - 1)
       pp->p_ch = '-';
     else

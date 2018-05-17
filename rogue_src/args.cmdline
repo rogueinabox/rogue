@@ -1,0 +1,12 @@
+
+# Options
+option "scoreboard" b "Display scoreboard and exit" flag off
+option "display-death" d "Display a death screen and exit" flag off
+option "load-game" l "Loads a saved game from the given path" string optional
+
+option "seed" s "Sets the random seed" int optional
+option "disable-monsters" m "Disables monsters" flag off
+option "disable-secrets" S "Disables secrets (i.e. hidden doors and corridors)" flag off
+option "amulet-level" a "Sets the level where the amulet will spawn" int optional default="26"
+option "hungertime" H "Sets the number of actions after which the rogue becomes faint" int optional default="1300"
+option "max-traps" t "Sets the maximum number of traps" int optional default="0"

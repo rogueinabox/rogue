@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <curses.h>
 #include "rogue.h"
+#include "cmdline.h"
 
 /*
  * main:
@@ -44,6 +45,11 @@ main(int argc, char **argv, char **envp)
 
 #endif
 
+  struct gengetopt_args_info args;
+  if (cmdline_parser(argc, argv, &args) != 0) {
+    exit(1);
+  }
+
   /*
    * get home and options from environment
    */
@@ -61,16 +67,19 @@ main(int argc, char **argv, char **envp)
 
   lowtime = (int) time(NULL);
 
-//#ifdef MASTER
-//    if (wizard && getenv("SEED") != NULL)
-  if (getenv("SEED") != NULL)
-    dnum = atoi(getenv("SEED"));
+  if (args.seed_given)
+    dnum = args.seed_arg;
   else
-//#endif
     dnum = lowtime + md_getpid();
 
   seed = dnum;
   srandom(seed);
+  
+  USE_MONSTERS = !args.disable_monsters_flag;
+  ENABLE_SECRETS = !args.disable_secrets_flag;
+  AMULETLEVEL = args.amulet_level_arg;
+  HUNGERTIME = args.hungertime_arg;
+  MAXTRAPS = args.max_traps_arg;
 
   open_score();
 
@@ -86,31 +95,29 @@ main(int argc, char **argv, char **envp)
 
   md_normaluser(); /* we drop any setgid/setuid priveldges here */
 
-  if (argc == 2) {
-    if (strcmp(argv[1], "-s") == 0) {
-      noscore = TRUE;
-      score(0, -1, 0);
-      exit(0);
-    }
-    else if (strcmp(argv[1], "-d") == 0) {
-      dnum = rnd(100);	/* throw away some rnd()s to break patterns */
+  if (args.scoreboard_flag) {
+    noscore = TRUE;
+    score(0, -1, 0);
+    exit(0);
+  }
+  else if (args.display_death_flag) {
+    dnum = rnd(100);	/* throw away some rnd()s to break patterns */
 
-      while (--dnum)
-        rnd(100);
+    while (--dnum)
+    rnd(100);
 
-      purse = rnd(100) + 1;
-      level = rnd(100) + 1;
-      initscr();
-      getltchars();
-      death(death_monst());
-      exit(0);
-    }
+    purse = rnd(100) + 1;
+    level = rnd(100) + 1;
+    initscr();
+    getltchars();
+    death(death_monst());
+    exit(0);
   }
 
   init_check();			/* check for legal startup */
 
-  if (argc == 2)
-    if (!restore(argv[1], envp))	/* Note: restore will never return */
+  if (args.load_game_given)
+    if (!restore(args.load_game_arg, envp))	/* Note: restore will never return */
       my_exit(1);
 
 #ifdef MASTER
