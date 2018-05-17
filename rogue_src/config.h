@@ -207,6 +207,9 @@
 /* number of scores to store in scoreboard */
 #define NUMSCORES 10
 
+/* Name of package */
+#define PACKAGE "rogue"
+
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "ant@anthive.com"
 
@@ -247,6 +250,9 @@
 /* utmp like file to pass to ucount() when counting online users (unlikely to
    work) */
 /* #undef UTMP */
+
+/* Version number of package */
+#define VERSION "5.4.4-ant-r1.1.4"
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */
