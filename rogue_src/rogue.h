@@ -26,6 +26,7 @@
 extern bool USE_MONSTERS;              /* Whether to enable monsters */
 extern bool ENABLE_SECRETS;            /* Whether to enable secret (i.e. hidden) doors and corridors */
 extern unsigned int AMULETLEVEL;       /* Level where the amulet of Yendor will spawn */
+extern unsigned int STARTLEVEL;        /* Level where the player will spawn */
 extern unsigned int HUNGERTIME;        /* Number of actions it takes for the rogue to become faint */
 extern unsigned int MAXTRAPS;          /* Maximum number of traps */
 

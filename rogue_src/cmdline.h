@@ -60,6 +60,9 @@ struct gengetopt_args_info
   int amulet_level_arg;	/**< @brief Sets the level where the amulet will spawn (default='26').  */
   char * amulet_level_orig;	/**< @brief Sets the level where the amulet will spawn original value given at command line.  */
   const char *amulet_level_help; /**< @brief Sets the level where the amulet will spawn help description.  */
+  int start_level_arg;	/**< @brief Sets the level where the player will spawn (default='1').  */
+  char * start_level_orig;	/**< @brief Sets the level where the player will spawn original value given at command line.  */
+  const char *start_level_help; /**< @brief Sets the level where the player will spawn help description.  */
   int hungertime_arg;	/**< @brief Sets the number of actions after which the rogue becomes faint (default='1300').  */
   char * hungertime_orig;	/**< @brief Sets the number of actions after which the rogue becomes faint original value given at command line.  */
   const char *hungertime_help; /**< @brief Sets the number of actions after which the rogue becomes faint help description.  */
@@ -76,6 +79,7 @@ struct gengetopt_args_info
   unsigned int disable_monsters_given ;	/**< @brief Whether disable-monsters was given.  */
   unsigned int disable_secrets_given ;	/**< @brief Whether disable-secrets was given.  */
   unsigned int amulet_level_given ;	/**< @brief Whether amulet-level was given.  */
+  unsigned int start_level_given ;	/**< @brief Whether start-level was given.  */
   unsigned int hungertime_given ;	/**< @brief Whether hungertime was given.  */
   unsigned int max_traps_given ;	/**< @brief Whether max-traps was given.  */
 

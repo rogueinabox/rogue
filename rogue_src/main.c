@@ -80,6 +80,7 @@ main(int argc, char **argv, char **envp)
   AMULETLEVEL = args.amulet_level_arg;
   HUNGERTIME = args.hungertime_arg;
   MAXTRAPS = args.max_traps_arg;
+  STARTLEVEL = args.start_level_arg;
 
   open_score();
 
@@ -184,6 +185,7 @@ main(int argc, char **argv, char **envp)
 #ifdef MASTER
   noscore = wizard;
 #endif
+  level = STARTLEVEL;
   new_level();			/* Draw current level */
   /*
    * Start up daemons and fuses
