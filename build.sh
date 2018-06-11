@@ -22,6 +22,7 @@ fi
 build() {
 
     cd ./rogue_src
+    ./bootstrap
     ./configure
 
     echo "building"
