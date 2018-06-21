@@ -34,18 +34,20 @@ const char *gengetopt_args_info_versiontext = "";
 const char *gengetopt_args_info_description = "";
 
 const char *gengetopt_args_info_help[] = {
-  "  -h, --help              Print help and exit",
-  "  -V, --version           Print version and exit",
-  "  -b, --scoreboard        Display scoreboard and exit  (default=off)",
-  "  -d, --display-death     Display a death screen and exit  (default=off)",
-  "  -l, --load-game=STRING  Loads a saved game from the given path",
-  "  -s, --seed=INT          Sets the random seed",
-  "  -m, --disable-monsters  Disables monsters  (default=off)",
-  "  -S, --disable-secrets   Disables secrets (i.e. hidden doors and corridors)\n                            (default=off)",
-  "  -a, --amulet-level=INT  Sets the level where the amulet will spawn\n                            (default=`26')",
-  "  -L, --start-level=INT   Sets the level where the player will spawn\n                            (default=`1')",
-  "  -H, --hungertime=INT    Sets the number of actions after which the rogue\n                            becomes faint  (default=`1300')",
-  "  -t, --max-traps=INT     Sets the maximum number of traps  (default=`0')",
+  "  -h, --help               Print help and exit",
+  "  -V, --version            Print version and exit",
+  "  -b, --scoreboard         Display scoreboard and exit  (default=off)",
+  "  -d, --display-death      Display a death screen and exit  (default=off)",
+  "  -l, --load-game=STRING   Loads a saved game from the given path",
+  "  -s, --seed=INT           Sets the random seed",
+  "  -m, --disable-monsters   Disables monsters  (default=off)",
+  "  -S, --disable-secrets    Disables secrets (i.e. hidden doors and corridors)\n                             (default=off)",
+  "  -D, --disable-darkrooms  Disable dark rooms generation (default chance:\n                             rnd(10) < level-1)  (default=off)",
+  "  -M, --disable-mazes      Disable mazes (default chance: 1/15 prob of a dark\n                             room to be a maze instead)  (default=off)",
+  "  -a, --amulet-level=INT   Sets the level where the amulet will spawn\n                             (default=`26')",
+  "  -L, --start-level=INT    Sets the level where the player will spawn\n                             (default=`1')",
+  "  -H, --hungertime=INT     Sets the number of actions after which the rogue\n                             becomes faint  (default=`1300')",
+  "  -t, --max-traps=INT      Sets the maximum number of traps  (default=`0')",
     0
 };
 
@@ -79,6 +81,8 @@ void clear_given (struct gengetopt_args_info *args_info)
   args_info->seed_given = 0 ;
   args_info->disable_monsters_given = 0 ;
   args_info->disable_secrets_given = 0 ;
+  args_info->disable_darkrooms_given = 0 ;
+  args_info->disable_mazes_given = 0 ;
   args_info->amulet_level_given = 0 ;
   args_info->start_level_given = 0 ;
   args_info->hungertime_given = 0 ;
@@ -96,6 +100,8 @@ void clear_args (struct gengetopt_args_info *args_info)
   args_info->seed_orig = NULL;
   args_info->disable_monsters_flag = 0;
   args_info->disable_secrets_flag = 0;
+  args_info->disable_darkrooms_flag = 0;
+  args_info->disable_mazes_flag = 0;
   args_info->amulet_level_arg = 26;
   args_info->amulet_level_orig = NULL;
   args_info->start_level_arg = 1;
@@ -120,10 +126,12 @@ void init_args_info(struct gengetopt_args_info *args_info)
   args_info->seed_help = gengetopt_args_info_help[5] ;
   args_info->disable_monsters_help = gengetopt_args_info_help[6] ;
   args_info->disable_secrets_help = gengetopt_args_info_help[7] ;
-  args_info->amulet_level_help = gengetopt_args_info_help[8] ;
-  args_info->start_level_help = gengetopt_args_info_help[9] ;
-  args_info->hungertime_help = gengetopt_args_info_help[10] ;
-  args_info->max_traps_help = gengetopt_args_info_help[11] ;
+  args_info->disable_darkrooms_help = gengetopt_args_info_help[8] ;
+  args_info->disable_mazes_help = gengetopt_args_info_help[9] ;
+  args_info->amulet_level_help = gengetopt_args_info_help[10] ;
+  args_info->start_level_help = gengetopt_args_info_help[11] ;
+  args_info->hungertime_help = gengetopt_args_info_help[12] ;
+  args_info->max_traps_help = gengetopt_args_info_help[13] ;
   
 }
 
@@ -260,6 +268,10 @@ cmdline_parser_dump(FILE *outfile, struct gengetopt_args_info *args_info)
     write_into_file(outfile, "disable-monsters", 0, 0 );
   if (args_info->disable_secrets_given)
     write_into_file(outfile, "disable-secrets", 0, 0 );
+  if (args_info->disable_darkrooms_given)
+    write_into_file(outfile, "disable-darkrooms", 0, 0 );
+  if (args_info->disable_mazes_given)
+    write_into_file(outfile, "disable-mazes", 0, 0 );
   if (args_info->amulet_level_given)
     write_into_file(outfile, "amulet-level", args_info->amulet_level_orig, 0);
   if (args_info->start_level_given)
@@ -530,6 +542,8 @@ cmdline_parser_internal (
         { "seed",	1, NULL, 's' },
         { "disable-monsters",	0, NULL, 'm' },
         { "disable-secrets",	0, NULL, 'S' },
+        { "disable-darkrooms",	0, NULL, 'D' },
+        { "disable-mazes",	0, NULL, 'M' },
         { "amulet-level",	1, NULL, 'a' },
         { "start-level",	1, NULL, 'L' },
         { "hungertime",	1, NULL, 'H' },
@@ -537,7 +551,7 @@ cmdline_parser_internal (
         { 0,  0, 0, 0 }
       };
 
-      c = getopt_long (argc, argv, "hVbdl:s:mSa:L:H:t:", long_options, &option_index);
+      c = getopt_long (argc, argv, "hVbdl:s:mSDMa:L:H:t:", long_options, &option_index);
 
       if (c == -1) break;	/* Exit from `while (1)' loop.  */
 
@@ -613,6 +627,26 @@ cmdline_parser_internal (
           if (update_arg((void *)&(args_info->disable_secrets_flag), 0, &(args_info->disable_secrets_given),
               &(local_args_info.disable_secrets_given), optarg, 0, 0, ARG_FLAG,
               check_ambiguity, override, 1, 0, "disable-secrets", 'S',
+              additional_error))
+            goto failure;
+        
+          break;
+        case 'D':	/* Disable dark rooms generation (default chance: rnd(10) < level-1).  */
+        
+        
+          if (update_arg((void *)&(args_info->disable_darkrooms_flag), 0, &(args_info->disable_darkrooms_given),
+              &(local_args_info.disable_darkrooms_given), optarg, 0, 0, ARG_FLAG,
+              check_ambiguity, override, 1, 0, "disable-darkrooms", 'D',
+              additional_error))
+            goto failure;
+        
+          break;
+        case 'M':	/* Disable mazes (default chance: 1/15 prob of a dark room to be a maze instead).  */
+        
+        
+          if (update_arg((void *)&(args_info->disable_mazes_flag), 0, &(args_info->disable_mazes_given),
+              &(local_args_info.disable_mazes_given), optarg, 0, 0, ARG_FLAG,
+              check_ambiguity, override, 1, 0, "disable-mazes", 'M',
               additional_error))
             goto failure;
         

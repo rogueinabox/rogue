@@ -88,9 +88,11 @@ do_rooms()
      * set room type
      */
     if (rnd(10) < level - 1) {
-      rp->r_flags |= ISDARK;		/* dark room */
+      if(ENABLE_DARKROOMS){
+        rp->r_flags |= ISDARK;		/* dark room */
+      }
 
-      if (rnd(15) == 0)
+      if (ENABLE_MAZES && rnd(15) == 0)
         rp->r_flags = ISMAZE;		/* maze room */
     }
 

@@ -77,6 +77,8 @@ main(int argc, char **argv, char **envp)
   
   USE_MONSTERS = !args.disable_monsters_flag;
   ENABLE_SECRETS = !args.disable_secrets_flag;
+  ENABLE_DARKROOMS = !args.disable_darkrooms_flag;
+  ENABLE_MAZES = !args.disable_mazes_flag;
   AMULETLEVEL = args.amulet_level_arg;
   HUNGERTIME = args.hungertime_arg;
   MAXTRAPS = args.max_traps_arg;
