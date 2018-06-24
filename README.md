@@ -8,6 +8,8 @@ by the game
     - the random seed
     - the presence of monsters
     - the presence of hidden tiles
+    - the presence of dark rooms
+    - the presence of mazes
     - the starting level
     - the level where the amulet will be
     - the hunger time
