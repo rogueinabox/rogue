@@ -1,15 +1,25 @@
-This is a custom build of the game Rogue for the rogueinabox library.
+This is a custom build of the game Rogue for the
+[Rogueinabox](https://github.com/rogueinabox)
+library
+and an extension of the
+[anthive](http://www.anthive.com/project/rogue/)
+implementation.
+
+See our CHANGELOG for more information.
+See AUTHORS for our contacts. 
 
 
 # Features
-- a command count at the bottom of the screen, which make it easy to tell when a command has been completely elaborated
-by the game
+- a command count at the bottom of the screen, 
+  which make it easy to tell when a command has been completely elaborated
+  by the game
 - several command line arguments to control:
     - the random seed
     - the presence of monsters
     - the presence of hidden tiles
     - the presence of dark rooms
     - the presence of mazes
+    - the possibility of replacing gone rooms with mazes
     - the starting level
     - the level where the amulet will be
     - the hunger time

@@ -1,0 +1,63 @@
+This file is part of Rogue for the Rogueinabox library
+(https://github.com/rogueinabox).
+
+Here we list the changes with respect to the Rogueinabox library.
+The changelog of the anthive implementation, on which we base this one,
+can be found in rogue_src/README.
+
+
+2018-06-25  Daniele Cortesi  <dani.c93@hotmail.it>
+
+* added AUTHORS, CHANGELOG and updated READMEs
+
+
+2018-06-21  Gianmaria Pedrini  <gianmariapedrini@gmail.com>
+
+* added command line flags to disable mazes and dark rooms
+
+
+2018-06-11  Carlo De Pieri  <depieri.carlo@gmail.com>
+
+* fixed automake issues
+
+* added command line flag to control starting level
+
+* removed build.sh and moved compilation logic to Makefile
+
+
+2018-05-17  Daniele Cortesi  <dani.c93@hotmail.it>
+
+* added compilation procedure in Makefile that calls build.sh
+
+* reconfigured autotools for the following points
+
+* had compilation produce a single executable
+
+* added command line flags to control:
+    - the random seed
+    - the presence of monsters
+    - the presence of hidden tiles
+    - the level where the amulet will be
+    - the hunger time
+    - the number of traps
+
+
+2018-04-06  Daniele Cortesi  <dani.c93@hotmail.it>
+
+* fixed command count so that it will increase for every character pressed
+
+
+2018-04-03  Daniele Cortesi  <dani.c93@hotmail.it>
+
+* added compilation procedure in build.sh that generates two executables,
+  one with monsters enabled and the other disabled
+
+
+2018-01  Francesco Sovrano <cesco.sovrano@gmail.com>
+
+* added a command count "Cmd" in the status bar on the bottom of the screen
+
+* added a compilation flag for enabling/disabling monsters
+
+
+Earlier changelog: see rogue_src/README.
