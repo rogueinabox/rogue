@@ -61,6 +61,8 @@ struct gengetopt_args_info
   const char *disable_darkrooms_help; /**< @brief Disable dark rooms generation (default chance: rnd(10) < level-1) help description.  */
   int disable_mazes_flag;	/**< @brief Disable mazes (default chance: 1/15 prob of a dark room to be a maze instead) (default=off).  */
   const char *disable_mazes_help; /**< @brief Disable mazes (default chance: 1/15 prob of a dark room to be a maze instead) help description.  */
+  int more_mazes_flag;	/**< @brief Replace gone rooms (long passageways) with mazes (requires MAZES enabled. default chance: rnd(4) gone rooms per level) (default=off).  */
+  const char *more_mazes_help; /**< @brief Replace gone rooms (long passageways) with mazes (requires MAZES enabled. default chance: rnd(4) gone rooms per level) help description.  */
   int amulet_level_arg;	/**< @brief Sets the level where the amulet will spawn (default='26').  */
   char * amulet_level_orig;	/**< @brief Sets the level where the amulet will spawn original value given at command line.  */
   const char *amulet_level_help; /**< @brief Sets the level where the amulet will spawn help description.  */
@@ -84,6 +86,7 @@ struct gengetopt_args_info
   unsigned int disable_secrets_given ;	/**< @brief Whether disable-secrets was given.  */
   unsigned int disable_darkrooms_given ;	/**< @brief Whether disable-darkrooms was given.  */
   unsigned int disable_mazes_given ;	/**< @brief Whether disable-mazes was given.  */
+  unsigned int more_mazes_given ;	/**< @brief Whether more-mazes was given.  */
   unsigned int amulet_level_given ;	/**< @brief Whether amulet-level was given.  */
   unsigned int start_level_given ;	/**< @brief Whether start-level was given.  */
   unsigned int hungertime_given ;	/**< @brief Whether hungertime was given.  */

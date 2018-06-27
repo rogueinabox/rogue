@@ -72,16 +72,24 @@ do_rooms()
       /*
        * Place a gone room.  Make certain that there is a blank line
        * for passage drawing.
+   	* If using mazes instead of passages GONE ROOMS BECOMES MAZES
        */
-      do {
-        rp->r_pos.x = top.x + rnd(bsze.x - 2) + 1;
-        rp->r_pos.y = top.y + rnd(bsze.y - 2) + 1;
-        rp->r_max.x = -NUMCOLS;
-        rp->r_max.y = -NUMLINES;
+      if (MOREMAZES && ENABLE_MAZES){
+        // Transform from ISGONE to ISMAZE 
+	rp->r_flags = ISMAZE;
       }
-      while (!(rp->r_pos.y > 0 && rp->r_pos.y < NUMLINES-1));
+      else {
+	// Normal behaviour for gone rooms
+        do {
+          rp->r_pos.x = top.x + rnd(bsze.x - 2) + 1;
+          rp->r_pos.y = top.y + rnd(bsze.y - 2) + 1;
+          rp->r_max.x = -NUMCOLS;
+          rp->r_max.y = -NUMLINES;
+        }
+        while (!(rp->r_pos.y > 0 && rp->r_pos.y < NUMLINES-1));
+      	continue;
+      }
 
-      continue;
     }
 
     /*

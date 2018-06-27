@@ -27,6 +27,7 @@ extern bool USE_MONSTERS;              /* Whether to enable monsters */
 extern bool ENABLE_SECRETS;            /* Whether to enable secret (i.e. hidden) doors and corridors */
 extern bool ENABLE_DARKROOMS;          /* Whether to enable dark rooms generation (default chance: rnd(10) < level-1) */
 extern bool ENABLE_MAZES;              /* Whether to enable mazes (default chance: 1/15 prob of a dark room to be a maze instead) */
+extern bool MOREMAZES;                 /* Whether to replace gone rooms (long passageways) with mazes (requires MAZES enabled. default chance: rnd(4) gone rooms per level) */
 extern unsigned int AMULETLEVEL;       /* Level where the amulet of Yendor will spawn */
 extern unsigned int STARTLEVEL;        /* Level where the player will spawn */
 extern unsigned int HUNGERTIME;        /* Number of actions it takes for the rogue to become faint */
