@@ -104,6 +104,13 @@ do_rooms()
         rp->r_flags = ISMAZE;		/* maze room */
     }
 
+
+    /*
+     * set all room to mazes if ALLMAZES
+     */
+    if (ALLMAZES)
+        rp->r_flags = ISMAZE;		/* maze room */
+
     /*
      * Find a place and size for a random room
      */

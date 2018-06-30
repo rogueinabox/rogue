@@ -80,6 +80,7 @@ main(int argc, char **argv, char **envp)
   ENABLE_DARKROOMS = !args.disable_darkrooms_flag;
   ENABLE_MAZES = !args.disable_mazes_flag;
   MOREMAZES  = args.more_mazes_flag;
+  ALLMAZES  = args.all_mazes_flag;
   AMULETLEVEL = args.amulet_level_arg;
   HUNGERTIME = args.hungertime_arg;
   MAXTRAPS = args.max_traps_arg;

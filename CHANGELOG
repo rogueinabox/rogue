@@ -5,6 +5,15 @@ Here we list the changes with respect to the Rogueinabox library.
 The changelog of the anthive implementation, on which we base this one,
 can be found in rogue_src/README.
 
+2018-06-30  Gianmaria Pedrini  <gianmariapedrini@gmail.com>
+
+* added command line flags to force all rooms to be mazes
+
+
+2018-06-27  Gianmaria Pedrini  <gianmariapedrini@gmail.com>
+
+* added command line flags add more mazes
+
 
 2018-06-25  Daniele Cortesi  <dani.c93@hotmail.it>
 
