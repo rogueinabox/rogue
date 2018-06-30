@@ -10,3 +10,4 @@ rogue_src/.deps/
 rogue_src/aclocal.m4
 rogue_src/autom4te.cache/
 rogue_src/stamp-h1
+rogue_src/config.h
