@@ -20,6 +20,7 @@ See AUTHORS for our contacts.
     - the presence of dark rooms
     - the presence of mazes
     - the possibility of replacing gone rooms with mazes
+    - the possibility of replacing all rooms with mazes
     - the starting level
     - the level where the amulet will be
     - the hunger time
