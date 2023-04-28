@@ -266,22 +266,12 @@ md_onsignal_autosave()
 int
 md_hasclreol()
 {
-#if defined(clr_eol)
-#ifdef NCURSES_VERSION
+    char *clr_eol_str = tigetstr("clr_eol");
 
-  if (cur_term == NULL)
-    return(0);
+    if (clr_eol_str == (char *)-1)
+        return 0;
 
-  if (cur_term->type.Strings == NULL)
-    return(0);
-
-#endif
-  return((clr_eol != NULL) && (*clr_eol != 0));
-#elif defined(__PDCURSES__)
-  return(TRUE);
-#else
-  return((CE != NULL) && (*CE != 0));
-#endif
+    return clr_eol_str != NULL;
 }
 
 void
